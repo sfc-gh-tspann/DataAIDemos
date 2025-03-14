@@ -7,7 +7,16 @@ create or replace TABLE DEMO.DEMO.STOCKVALUES (
 	TRADECONDITIONS VARCHAR(250)
 );
 
-
+create or replace TABLE DEMO.DEMO.TRADECONDITIONS (
+	TCCODE VARCHAR(16777216),
+	TCNAME VARCHAR(16777216),
+	TCUPDATELAST VARCHAR(16777216),
+	TCUPDATEHIGHLOW VARCHAR(16777216),
+	MARKETCENTERUUPDATELAST VARCHAR(16777216),
+	MARKETCENTERUPDATEHIGHLOW VARCHAR(16777216),
+	UPDATEVOLUME VARCHAR(16777216),
+	NOTE VARCHAR(16777216)
+);
 
 
 {"country":"US","currency":"USD","estimateCurrency":"USD","exchange":"NASDAQ NMS - GLOBAL MARKET","finnhubIndustry":"Technology","ipo":"1980-12-12","logo":"https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.png","marketCapitalization":3149828.207397,"name":"Apple Inc","phone":"14089961010","shareOutstanding":15037.87,"ticker":"AAPL","weburl":"https://www.apple.com/"}%                                                                                                            (base) tspann@LXLCQY329P code % curl "https://finnhub.io/api/v1/search?q=apple&exchange=US&token=$FINN_KEY"
