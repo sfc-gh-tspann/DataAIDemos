@@ -1,3 +1,14 @@
+create or replace TABLE DEMO.DEMO.STOCKVALUES (
+	UUID VARCHAR(250),
+	LASTPRICE FLOAT,
+	STOCKVOLUME FLOAT,
+	SYMBOL VARCHAR(250),
+	TS VARCHAR(250),
+	TRADECONDITIONS VARCHAR(250)
+);
+
+
+
 
 {"country":"US","currency":"USD","estimateCurrency":"USD","exchange":"NASDAQ NMS - GLOBAL MARKET","finnhubIndustry":"Technology","ipo":"1980-12-12","logo":"https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.png","marketCapitalization":3149828.207397,"name":"Apple Inc","phone":"14089961010","shareOutstanding":15037.87,"ticker":"AAPL","weburl":"https://www.apple.com/"}%                                                                                                            (base) tspann@LXLCQY329P code % curl "https://finnhub.io/api/v1/search?q=apple&exchange=US&token=$FINN_KEY"
 {"count":17,"result":[{"description":"APPLE INC","displaySymbol":"AAPL","symbol":"AAPL","type":"Common Stock"}
