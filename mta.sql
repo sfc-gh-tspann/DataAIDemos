@@ -79,3 +79,48 @@ END;
 call RETURN_MTA_NEARBY('40.3209','-74.4208');
 
 
+
+
+
+
+--
+-- KM https://docs.snowflake.com/en/sql-reference/functions/haversine
+-- 
+CREATE OR REPLACE PROCEDURE DEMO.DEMO.RETURN_MTA_NEARBY(YOURLATITUDE STRING, YOURLONGITUDE STRING)
+RETURNS TABLE ("BUS" VARCHAR, "destinationname" VARCHAR,  expectedarrivaltime  VARCHAR, EXPECTEDDEPARTURETIME VARCHAR,
+               stoppointname varchar, bearing varchar, distance float, distanceinmiles float, distancefromstop VARCHAR,
+               IncidentDescription VARCHAR, recordedattime VARCHAR, ESTIMATEDPASSENGERCOUNT VARCHAR,
+               ESTIMATEDPASSENGERCAPACITY VARCHAR, arrivalproximitytext VARCHAR, NUMBEROFSTOPSAWAY VARCHAR, TS VARCHAR)
+LANGUAGE SQL
+EXECUTE AS OWNER
+AS 
+DECLARE
+  res RESULTSET;
+BEGIN
+  res := ( SELECT VEHICLEREF as bus, destinationname, 
+         expectedarrivaltime,
+         EXPECTEDDEPARTURETIME, stoppointname, bearing,HAVERSINE( VEHICLELOCATIONLATITUDE, VEHICLELOCATIONLONGITUDE, :YOURLATITUDE,	
+         :YOURLONGITUDE ) as distance, 
+         (ST_DISTANCE(ST_MAKEPOINT(VEHICLELOCATIONLATITUDE,VEHICLELOCATIONLONGITUDE), ST_MAKEPOINT(:YOURLATITUDE,:YOURLONGITUDE))/1609) as distanceinmiles,
+         distancefromstop,SITUATIONSIMPLEREF1 as IncidentDescription, 
+      recordedattime, ESTIMATEDPASSENGERCOUNT, 
+      ESTIMATEDPASSENGERCAPACITY, 
+      arrivalproximitytext,
+      NUMBEROFSTOPSAWAY, 
+      TS 
+  FROM icymta
+  WHERE DISTANCEFROMSTOP > 0
+  ORDER BY distance ASC);
+  RETURN TABLE(res);
+END;
+
+
+
+call RETURN_MTA_NEARBY('40.3209','-74.4208');
+
+-- https://quickstarts.snowflake.com/guide/getting_started_with_geospatial_geography/index.html#1 
+-- https://docs.snowflake.com/en/sql-reference/functions/st_makepoint
+-- https://geojson.io/#map=2/0/20  
+-- https://clydedacruz.github.io/openstreetmap-wkt-playground/
+
+
