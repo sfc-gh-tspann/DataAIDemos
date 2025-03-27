@@ -161,6 +161,51 @@ create or replace ICEBERG TABLE VEHICLEPOSITIONS (
   BASE_LOCATION = 'stocks';
 
 
+CREATE ICEBERG TABLE ICYMTA (
+   StopPointRef               STRING
+  ,VehicleRef                 STRING
+  ,ProgressRate               STRING
+  ,ExpectedDepartureTime      STRING
+  ,StopPoint                  STRING
+  ,VisitNumber                STRING
+  ,DataFrameRef               STRING
+  ,StopPointName              STRING
+  ,SituationSimpleRef5        STRING
+  ,SituationSimpleRef3        STRING
+  ,Bearing                    STRING
+  ,SituationSimpleRef4        STRING
+  ,SituationSimpleRef1        STRING
+  ,OriginAimedDepartureTime   STRING
+  ,SituationSimpleRef2        STRING
+  ,JourneyPatternRef          STRING
+  ,RecordedAtTime             STRING
+  ,OperatorRef                STRING
+  ,DestinationName            STRING
+  ,ExpectedArrivalTime        STRING
+  ,BlockRef                   STRING
+  ,LineRef                    STRING
+  ,VehicleLocationLongitude   STRING
+  ,DirectionRef               STRING
+  ,ArrivalProximityText       STRING
+  ,DistanceFromStop           STRING
+  ,EstimatedPassengerCapacity STRING
+  ,AimedArrivalTime           STRING
+  ,PublishedLineName          STRING
+  ,DatedVehicleJourneyRef     STRING
+  ,Date                       STRING
+  ,Monitored                  STRING
+  ,ProgressStatus             STRING
+  ,DestinationRef             STRING
+  ,EstimatedPassengerCount    STRING 
+  ,VehicleLocationLatitude    STRING
+  ,OriginRef                  STRING
+  ,NumberOfStopsAway          STRING
+  ,ts                         STRING
+  ,uuid                       STRING
+  )
+  CATALOG = 'SNOWFLAKE'
+  EXTERNAL_VOLUME = 'transcom_tspanniceberg_extvol'
+  BASE_LOCATION = 'mta';
 
 
 ````
