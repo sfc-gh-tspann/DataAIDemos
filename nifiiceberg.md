@@ -1,5 +1,28 @@
 #### Demo
 
+#### S3 Stage for Storage Volume
+
+````
+  CREATE OR REPLACE EXTERNAL VOLUME transcom_tspanniceberg_extvol
+   STORAGE_LOCATIONS =
+      (
+         (
+            NAME = 'se-tspann-apacheiceberg'
+            STORAGE_PROVIDER = 'S3'
+            STORAGE_BASE_URL = 's3://se-tspann-apacheiceberg/'
+            STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::9999999999:role/se_tspann_iceberg_table_nifirole'
+            STORAGE_AWS_EXTERNAL_ID = 'se_tspann_iceberg_table_external_id'
+         )
+      );
+
+describe external volume transcom_tspanniceberg_extvol;
+
+SELECT SYSTEM$VERIFY_EXTERNAL_VOLUME('transcom_tspanniceberg_extvol');
+
+describe table icytranscome;
+
+````
+
 #### Iceberg Tables
 
 ````
