@@ -45,3 +45,14 @@ create or replace ICEBERG TABLE DEMO.DEMO.AQ (
 SELECT * FROM AQFORECAST
   order by dateforecast desc, parametername asc, statecode desc, reportingarea desc, ts desc;
   
+ select zipcode from zipcodes order by state asc;
+
+
+create or replace TABLE DEMO.DEMO.ZIPCODES (
+	STATE_FIPS VARCHAR(16777216),
+	STATE VARCHAR(16777216),
+	STATE_ABBR VARCHAR(16777216),
+	ZIPCODE VARCHAR(16777216),
+	COUNTY VARCHAR(16777216),
+	CITY VARCHAR(16777216)
+);
