@@ -15,3 +15,14 @@ END;
 
 call DEMO.DEMO.PARSEDOCS('${pdffile}');
 
+
+CREATE OR REPLACE TABLE PARSEDCONTENT (
+	content_id NUMBER(38,0) primary key autoincrement start 1 increment 1 noorder,
+	content VARCHAR(16777216),
+    metadata VARCHAR(16777216)
+);
+
+desc table PARSEDCONTENT;
+
+select * from PARSEDCONTENT;
+
