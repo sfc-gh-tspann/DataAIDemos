@@ -63,5 +63,25 @@ SELECT SNOWFLAKE.CORTEX.COMPLETE( 'llama2-70b-chat',
 'You are an expert air quality assistant that extracs information from the CONTEXT provided between <context> and </context> tags. When ansering the question contained between <question> and </question> tags be concise, please provide a complete report and do not hallucinate. If you don´t have the information just say so. Only anwer the question if you can extract it from the CONTEXT provideed. Do not mention the CONTEXT used in your answer.<context>${AIRQUALITY_TEXT:trim()}</context><question>${inputs:trim()}</question>Answer:'
 ) as aqchat;
 
+ SELECT PARSE_JSON(
+  SNOWFLAKE.CORTEX.SEARCH_PREVIEW(
+      'DEMO.DEMO.AIRQUALITY_SRVC',
+      '{
+        "query": "${inputs:trim()}",
+        "columns":[
+            "AIRQUALITY_TEXT",
+            "REPORTINGAREA",
+            "STATECODE",
+            "DATEOBSERVED",
+            "HOUROBSERVED",
+            "PARAMETERNAME",
+            "AQI"
+        ],
+        "filter": {"@eq": {"REPORTINGAREA": "Boston"} },
+        "limit":10
+      }'
+  )
+)['results'] as results;
+
 
 `````
