@@ -1,0 +1,49 @@
+{
+  "model": "llama3.3-70b",
+  "response_instruction": "You will always maintain a friendly tone, use all tools, not hallucinate and provide a concise response.",
+  "tools": [
+    {
+      "tool_spec": {
+        "name": "aq_search",
+        "type": "cortex_search"
+      }
+    },
+    {
+      "tool_spec": {
+        "name": "data_model",
+        "type": "cortex_analyst_text_to_sql"
+      }
+    },
+    {
+      "tool_spec": {
+        "type": "sql_exec",
+        "name": "sql_exec"
+      }
+    }
+  ],
+  "tool_resources": {
+    "aq_search": {
+            "name": "DEMO.DEMO.AIRQUALITY_SRVC",
+            "max_results": 5,
+            "title_column": "DOC_TITLE",
+            "id_column": "DOC_ID",
+    },
+    "data_model": {
+      "semantic_model_file": "@DEMO.DEMO.SEMANTIC_MODELS/weather.yaml"
+    }
+  },
+  "tool_choice": {
+    "type": "auto"
+  },
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What is the weather and air quality in New York City right now?"
+        }
+      ]
+    }
+  ]
+}
